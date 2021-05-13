@@ -10,9 +10,9 @@ import time
 
 # 스레드 실행 함수
 def thread_func(name):
-    logging.info("Sub-Thread %s: starting", name)
+    logging.info("**Sub-Thread %s: starting", name)
     time.sleep(3)
-    logging.info("Sub-Thread %s: finishing", name)
+    logging.info("**Sub-Thread %s: finishing", name)
 
 # 메인 영역
 if __name__ == "__main__":
@@ -32,6 +32,6 @@ if __name__ == "__main__":
     logging.info("Main-Thread : wait for the thread to finish")
     
     # 주석 전후 결과 확인, 자식 스레드가 끝날때까지 메인 스레드 기다린 후 종료됨.자식스레드기다림
-    x.join()
+    # x.join()
     
     logging.info("Main-Thread : all done")
