@@ -5,7 +5,6 @@ Keyword - DeamonThread, Join
 
 """
 """
-
 DaemonThread(데몬스레드)
 (1).백그라운드에서 실행
 (2).메인스레드 종료시 즉시 종료 - 데몬스레드의 특징
