@@ -18,16 +18,16 @@ from concurrent.futures import ThreadPoolExecutor
 import time
 
 
-def task(name, n):
+def task(name, n=10001):
     logging.info('***Sub-Thread %s: starting', name)
 
-    result = 0
+    answer = 0
     for i in range(n):
-        result += i
+        answer += i
 
-    logging.info('***Sub-Thread %s: finished result: %d', name, result)
+    logging.info('***Sub-Thread %s: finished answer: %d', name, answer)
 
-    return result
+    return answer
 
 
 def main():
@@ -37,16 +37,17 @@ def main():
 
     logging.info('Main-Thread : before creating and running thread')
 
-    # # 실행방법1
-    # # amx_workers : 작업의 개수가 넘어가면 직접 설정이 유리
-    # excutor = ThreadPoolExecutor(max_workers=3)
-    # task1 = excutor.submit(task, ('First',))
-    # task2 = excutor.submit(task, ('Second',))
-    # # task3 = excutor.submit(task, ('Third',))
+    # 실행방법1
+    # amx_workers : 작업의 개수가 넘어가면 직접 설정이 유리
+    excutor = ThreadPoolExecutor(max_workers=3)
+    task1 = excutor.submit(task, ('First',))
+    task2 = excutor.submit(task, ('Second',))
+    # task3 = excutor.submit(task, ('Third',))
 
-    # # 결과값이 있을 경우
-    # print('task1:', task1.result())
-    # print('task2:', task2.result())
+    # 결과값이 있을 경우
+    print('task1:', task1.result())
+    print('task2:', task2.result())
+    print('*****************************************')
 
     '''
     executor.map(func, args)에서 
