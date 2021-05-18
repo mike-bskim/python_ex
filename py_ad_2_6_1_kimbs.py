@@ -17,6 +17,7 @@ def worker(id, baseNum, q):
 
     process_id = os.getpid()
     process_name = current_process().name
+    print(f"Process ID: {process_id}, Process Name: {process_name}")
 
     # 누적
     sub_total = 0
@@ -24,13 +25,13 @@ def worker(id, baseNum, q):
     # 계산
     for i in range(baseNum):
         sub_total += 1
+        # time.sleep(0.1)
 
     # Produce
     q.put(sub_total)
 
     # 정보 출력
-    print(f"Process ID: {process_id}, Process Name: {process_name}")
-    print(f"*** Sub Result : {sub_total}, given ID: {id}")
+    print(f"*** Sub Result : {sub_total},")
 
 def main():
 
@@ -49,7 +50,7 @@ def main():
     q = Queue()
 
      # 프로세스 생성 및 실행
-    for i in range(5): # 1 ~ 100 적절히 조절
+    for i in range(4): # 1 ~ 100 적절히 조절
         # 생성
         t = Process(name=str(i).zfill(2), target=worker, args=(i, 100000000, q))
 
