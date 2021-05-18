@@ -1,6 +1,6 @@
 """
 Section 2
-Parallelism with Multiprocessing - multiprocessing(4) - Sharing state
+Parallelism with Multiprocessing - Multiprocessing(4) - Sharing state
 
 Keyword - memory sharing, array, value
 
@@ -42,7 +42,7 @@ def main():
     share_value = Value('i', 0)
     for k in range(1,10):
         # 생성
-        p = p = Process(name='변수공유안함_'+str(k).zfill(2), target=generate_update_number, args=(share_value,))
+        p = Process(name='변수공유안함_'+str(k).zfill(2), target=generate_update_number, args=(share_value,))
         # 배열에 담기
         processes.append(p)
         # 실행

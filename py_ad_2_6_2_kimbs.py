@@ -1,6 +1,6 @@
 """
 Section 2
-Parallelism with Multiprocessing - multiprocessing(5) - Queue, Pipe
+Parallelism with Multiprocessing - Multiprocessing(5) - Queue, Pipe
 
 Keyword - Queue, Pipe, Communications between processes
 
