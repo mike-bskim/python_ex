@@ -3,7 +3,7 @@ Section 3
 Concurrency, CPU Bound vs I/O Bound - I/O Bound(2) - threading vs asyncio vs multiprocessing
 
 
-Keyword - I/O Bound, requests, threading
+Keyword - I/O Bound, Threading, requests
 
 """
 # I/O-Bound Threading 예제(https://realpython.com/python-concurrency/#synchronous-version)
@@ -14,13 +14,14 @@ import threading
 import requests
 import time
 
-# 각 스레드에 생성되는 객체(독립적)
+# 각 스레드에 생성되는 객체(독립된 네임스페이스)
 thread_local = threading.local()
 
 # 세션 제공
 def get_session():
-    if not hasattr(thread_local, "session"):
+    if not hasattr(thread_local, "session"): # 딕셔너리 타입으로 확인
         thread_local.session = requests.Session()
+        print('>>> not hasattr()')
     return thread_local.session
 
 # 실행함수1(다운로드)
@@ -40,14 +41,14 @@ def request_site(url):
 def request_all_site(urls):
     # 멀티스레드 실행
     # 반드시 max_worker 개수 조절 후 session 객체 확인
-    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
         executor.map(request_site, urls)
 
 def main():
     # 테스트 URLS
     urls = [
             "https://www.jython.org",
-            "http://olympus.realpython.org/dice",
+            "https://www.naver.com",
             "https://realpython.com/"
     ] * 3
     

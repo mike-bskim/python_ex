@@ -23,11 +23,12 @@ def set_global_session():
     global session
     if not session:
         session = requests.Session()
+        print('>>> not session()')
 
 # 실행함수1(다운로드)
 def request_site(url):
     # 세션 확인
-    # print(session)
+    print(session)
     # print(session.headers)
 
     with session.get(url) as response:
@@ -40,7 +41,7 @@ def request_all_site(urls):
     # 멀티프로세싱 실행
     # 반드시 processes 개수 조절 후 session 객체 및 실행 시간 확인
     # 생략시 자동으로 설정
-    with multiprocessing.Pool(initializer=set_global_session, processes=4) as pool:
+    with multiprocessing.Pool(initializer=set_global_session, processes=3) as pool:
         # pool 병렬화(함수 실행)
         pool.map(request_site, urls)
 
@@ -48,7 +49,7 @@ def main():
     # 테스트 URLS
     urls = [
             "https://www.jython.org",
-            "http://olympus.realpython.org/dice",
+            "https://www.naver.com",
             "https://realpython.com/"
     ] * 3
     

@@ -10,7 +10,9 @@ Keyword - I/O Bound, requests, asyncio
 # threading 보다 높은 코드 복잡도 -> Async, Await 적절하게 코딩
 
 import asyncio
+# pip install aiohttp
 import aiohttp
+# import requests # 패키지는 동기방식이라서 사용불가.
 import time
 
 # 실행함수1(다운로드)
@@ -22,7 +24,8 @@ async def request_site(session, url):
     
     async with session.get(url) as response:
         # status_code 동기화 문제
-        print("Read Contents {0}, from {1}".format(response.content_length, url))
+        print("Read Contents {}, from {}, stauts:{}".format(response.content_length, url, response.status))
+        # print("*****Read Contents {0}, from {1}".format(response.status, url))
 
 # 실행함수2
 async def request_all_site(urls):
@@ -45,8 +48,8 @@ def main():
     # 테스트 URLS
     urls = [
             "https://www.jython.org",
-            "http://olympus.realpython.org/dice",
-            "https://daum.net"
+            "https://www.naver.com",
+            "https://realpython.com/"
     ] * 3
     
     # 실행시간 측정
@@ -55,7 +58,7 @@ def main():
     # 실행1
     asyncio.get_event_loop().run_until_complete(request_all_site(urls))
     # 실행2(파이썬 3.7 이상)
-    # asyncio.run(request_all_site(urls))
+    # asyncio.run(request_all_site(urls)) # 3.8+ 에서 버그 있음
 
     # 실행 시간 종료
     duration = time.time() - start_time
